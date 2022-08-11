@@ -49,13 +49,5 @@ if (pesoEhValido && alturaEhValida) {
 
 }
 
+// PARTE 4
 
-
-
-
-
-// console.log(paciente);
-// console.log(tdPeso);
-// console.log(peso);
-// console.log(altura);
-// console.log(imc);
