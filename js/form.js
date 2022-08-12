@@ -15,22 +15,27 @@ botoaAdicionar.addEventListener("click", function(event) {
     var pesoDado = form.peso.value;
     var alturaDada = form.altura.value;
     var gorduraDada = form.gordura.value;
-
+    
     var pacienteNovo = document.createElement("tr");
     var nomeNovo = document.createElement("td");
     var pesoNovo = document.createElement("td");
     var alturaNova = document.createElement("td");
     var gorduraNova = document.createElement("td");
+    var imcResult = document.createElement("td")
 
     nomeNovo.textContent = nomeDado;
     pesoNovo.textContent = pesoDado;
     alturaNova.textContent = alturaDada;
     gorduraNova.textContent = gorduraDada;
+    imcResult.textContent = calculaImc(pesoDado, alturaDada)
 
-    pacienteNovo.appendChild(nomeNovo)
-    pacienteNovo.appendChild(pesoNovo)
-    pacienteNovo.appendChild(alturaNova)
-    pacienteNovo.appendChild(gorduraNova)
+    pacienteNovo.appendChild(nomeNovo);
+    pacienteNovo.appendChild(pesoNovo);
+    pacienteNovo.appendChild(alturaNova);
+    pacienteNovo.appendChild(gorduraNova);
+
+    pacienteNovo.appendChild(imcResult);
+
 
     var tabela = document.querySelector("#tabela-pacientes");
 
