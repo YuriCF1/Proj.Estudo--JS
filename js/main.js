@@ -50,4 +50,12 @@ if (pesoEhValido && alturaEhValida) {
 }
 
 // PARTE 4
+// OBS: No addEventListener, colocar o nome da função com o parentese, passa o retorno da função, e não executa ela em si
+// OBS: Campos com entrada para usuário possuem o método value e outros ficam com o textContent
 
+var botoaAdicionar = document.querySelector("#adicionar-paciente");
+botoaAdicionar.addEventListener("click", function(event) {
+    // Previnir comportamento padrão
+    event.preventDefault();
+
+})
