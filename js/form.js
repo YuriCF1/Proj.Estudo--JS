@@ -32,6 +32,9 @@ botoaAdicionar.addEventListener("click", function (event) {
   tabela.appendChild(pacienteNovo);
   // Reseta os valores (value's) dos inputs do form para o valor original. NÃO APAGA
   form.reset();
+  var mensagensDeErro = document.querySelector("#mensagem-erros");
+  mensagensDeErro.innerHTML = ""
+
 });
 
 function obtemInfoDoForm(form) {
@@ -116,11 +119,34 @@ function validaPaciente(paciente) {
   if (!validaPeso(paciente.pesoDado)) erros.push("Verifique, o peso parece inválido.");
   if (!validaAltura(paciente.alturaDada)) erros.push("Verifique, a altura parece inválida.");
   
+  if (paciente.nomeDado.length == 0) {
+    erros.push("O nome não pode ser em branco.")
+
+  }
+
+  if (paciente.pesoDado.length == 0) {
+    erros.push("O peso não pode ser em branco.")
+
+  }
+
+  if (paciente.alturaDada.length == 0) {
+    erros.push("A altura não pode ser em branco.")
+''
+  }
+
+  if (paciente.gorduraDada.length == 0) {
+    erros.push("A taxa de gordura não pode ser em branco.")
+
+  }
+
+  
+
   return erros;
 }
 
 function exibeMensagemDeErro(erros) {
   var ul = document.querySelector("#mensagem-erros");
+  ul.innerHTML = "";
 
   erros.forEach(function(erro) {
     var li = document.createElement("li");
