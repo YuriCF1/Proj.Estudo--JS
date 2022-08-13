@@ -149,10 +149,24 @@ button[disabled=disabled], button:disabled {
 
 }
 
-/* Efeito */
-
 .fade-out {
 	opacity: 0;
 	transition: 0.35s;
+
+}
+
+.busca {
+	color: #222222;
+	font-weight: bold;
+}
+
+#filtrar-tabela {
+	width: 15rem;
+	height: 1.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.invisivel {
+	display: none;
 
 }
