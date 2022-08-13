@@ -10,97 +10,122 @@ botoaAdicionar.addEventListener("click", function (event) {
 
   var form = document.querySelector("#form-adiciona");
   // Extrindo informacções do paciente do form
-  var pacienteForm =  obtemInfoDoForm(form);
+  var pacienteForm = obtemInfoDoForm(form);
 
   // Montando a TR
   var pacienteNovo = montaTr(pacienteForm);
 
+  // Validando o paciente
+  var erros = validaPaciente(pacienteForm);
+  
+  if (erros.length > 0) {
+    exibeMensagemDeErro(erros);
+
+    // var mensagemErro = document.querySelector("#mensagem-erros");
+    // mensagemErro.textContent = erros;
+    return; //Um retorno vazio faz com que a função pare de ser executada, logo, não acrescentando na tabela
+  }
+
   // Adicionand o paciente na tabela
   var tabela = document.querySelector("#tabela-pacientes");
-     
+
   tabela.appendChild(pacienteNovo);
   // Reseta os valores (value's) dos inputs do form para o valor original. NÃO APAGA
   form.reset();
-  console.log(form);
-  
-
 });
 
 function obtemInfoDoForm(form) {
+  // Essas propriedades foram pegas do atributo HTML "name"
   var paciente = {
     nomeDado: form.nome.value,
     pesoDado: form.peso.value,
     alturaDada: form.altura.value,
     gorduraDada: form.gordura.value,
     imc: calculaImc(form.peso.value, form.altura.value),
-  }
+  };
 
   return paciente;
 }
 
-  // // Extrindo informacções do paciente do form
-  // var form = document.querySelector("#form-adiciona");
-  // var nomeDado = form.nome.value; // Essas propriedades foram pegas do atributo HTML "name"
-  // var pesoDado = form.peso.value;
-  // var alturaDada = form.altura.value;
-  // var gorduraDada = form.gordura.value;
+// // Extrindo informacções do paciente do form
+// var form = document.querySelector("#form-adiciona");
+// var nomeDado = form.nome.value;
+// var pesoDado = form.peso.value;
+// var alturaDada = form.altura.value;
+// var gorduraDada = form.gordura.value;
 
-  function montaTd(dado,classe ) {
-    var td = document.createElement("td");
-    td.textContent = dado;
-    td.classList.add(classe)
-    
-    return td;
-    
-  }
+function montaTd(dado, classe) {
+  var td = document.createElement("td");
+  td.textContent = dado;
+  td.classList.add(classe);
+
+  return td;
+}
+
+function montaTr(paciente) {
+  // Cria a TR do paciente
+  var pacienteCriado = document.createElement("tr");
+  pacienteCriado.classList.add("paciente");
+
+  // Cria a TD do paciente
+  pacienteCriado.appendChild(montaTd(paciente.nomeDado, "info-nome"));
+  pacienteCriado.appendChild(montaTd(paciente.pesoDado, "info-peso"));
+  pacienteCriado.appendChild(montaTd(paciente.alturaDada, "info-altura"));
+  pacienteCriado.appendChild(montaTd(paciente.gorduraDada, "info-gordura"));
+  pacienteCriado.appendChild(montaTd(paciente.imc, "info-imc"));
+
+  return pacienteCriado;
+}
+
+// var nomeNovo = document.createElement("td");
+// var pesoNovo = document.createElement("td");
+// var alturaNova = document.createElement("td");
+// var gorduraNova = document.createElement("td");
+// var imcResult = document.createElement("td");
+
+// nomeNovo.textContent = paciente.nomeDado;
+// pesoNovo.textContent = paciente.pesoDado;
+// alturaNova.textContent = paciente.alturaDada;
+// gorduraNova.textContent = paciente.gorduraDada;
+// imcResult.textContent = paciente.imc;
+
+// // Cria a TR do paciente
+// var pacienteNovo = document.createElement("tr");
+// var nomeNovo = document.createElement("td");
+// var pesoNovo = document.createElement("td");
+// var alturaNova = document.createElement("td");
+// var gorduraNova = document.createElement("td");
+// var imcResult = document.createElement("td");
+
+// nomeNovo.textContent = nomeDado;
+// pesoNovo.textContent = pesoDado;
+// alturaNova.textContent = alturaDada;
+// gorduraNova.textContent = gorduraDada;
+// imcResult.textContent = calculaImc(pesoDado, alturaDada);
+
+// pacienteNovo.appendChild(nomeNovo);
+// pacienteNovo.appendChild(pesoNovo);
+// pacienteNovo.appendChild(alturaNova);
+// pacienteNovo.appendChild(gorduraNova);
+
+// pacienteNovo.appendChild(imcResult);
+
+function validaPaciente(paciente) {
+  var erros = [];
+
+  if (!validaPeso(paciente.pesoDado)) erros.push("Verifique, o peso parece inválido.");
+  if (!validaAltura(paciente.alturaDada)) erros.push("Verifique, a altura parece inválida.");
   
-  function montaTr (paciente) {
-      // Cria a TR do paciente
-      var pacienteCriado = document.createElement("tr");
-      pacienteCriado.classList.add("paciente")
+  return erros;
+}
 
-      // Cria a TD do paciente
-      pacienteCriado.appendChild(montaTd(paciente.nomeDado, "info-nome"));
-      pacienteCriado.appendChild(montaTd(paciente.pesoDado, "info-peso"));
-      pacienteCriado.appendChild(montaTd(paciente.alturaDada, "info-altura"));
-      pacienteCriado.appendChild(montaTd(paciente.gorduraDada, "info-gordura"));
-      pacienteCriado.appendChild(montaTd(paciente.imc, "info-imc"));
+function exibeMensagemDeErro(erros) {
+  var ul = document.querySelector("#mensagem-erros");
 
-      return pacienteCriado;
-  }
+  erros.forEach(function(erro) {
+    var li = document.createElement("li");
+    li.textContent = erro;
+    ul.appendChild(li)
+  });
 
-
-
-    // var nomeNovo = document.createElement("td");
-    // var pesoNovo = document.createElement("td");
-    // var alturaNova = document.createElement("td");
-    // var gorduraNova = document.createElement("td");
-    // var imcResult = document.createElement("td");
-    
-    // nomeNovo.textContent = paciente.nomeDado;
-    // pesoNovo.textContent = paciente.pesoDado;
-    // alturaNova.textContent = paciente.alturaDada;
-    // gorduraNova.textContent = paciente.gorduraDada;
-    // imcResult.textContent = paciente.imc;
-  
-    
-    // // Cria a TR do paciente
-    // var pacienteNovo = document.createElement("tr");
-    // var nomeNovo = document.createElement("td");
-  // var pesoNovo = document.createElement("td");
-  // var alturaNova = document.createElement("td");
-  // var gorduraNova = document.createElement("td");
-  // var imcResult = document.createElement("td");
-
-  // nomeNovo.textContent = nomeDado;
-  // pesoNovo.textContent = pesoDado;
-  // alturaNova.textContent = alturaDada;
-  // gorduraNova.textContent = gorduraDada;
-  // imcResult.textContent = calculaImc(pesoDado, alturaDada);
-
-  // pacienteNovo.appendChild(nomeNovo);
-  // pacienteNovo.appendChild(pesoNovo);
-  // pacienteNovo.appendChild(alturaNova);
-  // pacienteNovo.appendChild(gorduraNova);
-
-  // pacienteNovo.appendChild(imcResult);
+}
