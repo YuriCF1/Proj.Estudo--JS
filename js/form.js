@@ -116,25 +116,25 @@ function montaTr(paciente) {
 function validaPaciente(paciente) {
   var erros = [];
 
-  if (!validaPeso(paciente.pesoDado)) erros.push("Verifique, o peso parece inválido.");
-  if (!validaAltura(paciente.alturaDada)) erros.push("Verifique, a altura parece inválida.");
-  
-  if (paciente.nomeDado.length == 0) {
+  if (!validaPeso(paciente.peso)) erros.push("Verifique, o peso parece inválido.");
+  if (!validaAltura(paciente.altura)) erros.push("Verifique, a altura parece inválida.");
+
+  if (paciente.nome.length == 0) {
     erros.push("O nome não pode ser em branco.")
 
   }
 
-  if (paciente.pesoDado.length == 0) {
+  if (paciente.peso.length == 0) {
     erros.push("O peso não pode ser em branco.")
 
   }
 
-  if (paciente.alturaDada.length == 0) {
+  if (paciente.altura.length == 0) {
     erros.push("A altura não pode ser em branco.")
 ''
   }
 
-  if (paciente.gorduraDada.length == 0) {
+  if (paciente.gordura.length == 0) {
     erros.push("A taxa de gordura não pode ser em branco.")
 
   }

@@ -168,5 +168,12 @@ button[disabled=disabled], button:disabled {
 
 .invisivel {
 	display: none;
+	
+}
+
+.invisivel-erro {
+	/* display: none; */
+	color: red;
+	font-weight: bold;
 
 }
