@@ -40,10 +40,10 @@ botoaAdicionar.addEventListener("click", function (event) {
 function obtemInfoDoForm(form) {
   // Essas propriedades foram pegas do atributo HTML "name"
   var paciente = {
-    nomeDado: form.nome.value,
-    pesoDado: form.peso.value,
-    alturaDada: form.altura.value,
-    gorduraDada: form.gordura.value,
+    nome: form.nome.value,
+    peso: form.peso.value,
+    altura: form.altura.value,
+    gordura: form.gordura.value,
     imc: calculaImc(form.peso.value, form.altura.value),
   };
 
@@ -71,10 +71,10 @@ function montaTr(paciente) {
   pacienteCriado.classList.add("paciente");
 
   // Cria a TD do paciente
-  pacienteCriado.appendChild(montaTd(paciente.nomeDado, "info-nome"));
-  pacienteCriado.appendChild(montaTd(paciente.pesoDado, "info-peso"));
-  pacienteCriado.appendChild(montaTd(paciente.alturaDada, "info-altura"));
-  pacienteCriado.appendChild(montaTd(paciente.gorduraDada, "info-gordura"));
+  pacienteCriado.appendChild(montaTd(paciente.nome, "info-nome"));
+  pacienteCriado.appendChild(montaTd(paciente.peso, "info-peso"));
+  pacienteCriado.appendChild(montaTd(paciente.altura, "info-altura"));
+  pacienteCriado.appendChild(montaTd(paciente.gordura, "info-gordura"));
   pacienteCriado.appendChild(montaTd(paciente.imc, "info-imc"));
 
   return pacienteCriado;
@@ -153,5 +153,14 @@ function exibeMensagemDeErro(erros) {
     li.textContent = erro;
     ul.appendChild(li)
   });
+
+}
+
+// PARTE 9____________
+
+function adicionaPacienteAPI(paciente){
+    var pacienteAPI = montaTr(paciente);
+    var tabelaDaAPI = document.querySelector("#tabela-pacientes");
+    tabelaDaAPI.appendChild(pacienteAPI); 
 
 }
